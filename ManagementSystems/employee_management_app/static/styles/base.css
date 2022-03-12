@@ -1,0 +1,38 @@
+    html,
+    body {
+    margin: 0;
+    }
+
+    body {
+    display: grid;
+    grid-template-areas:
+        "navbar-top navbar-top" 
+        "header main"
+        "footer footer"
+    ;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: auto 1fr;
+    min-height: 100vh;
+    }
+    .navbar-top{
+    grid-area: navbar-top;
+    background-color: #D3E0EA;
+    }
+    .header {
+    grid-area: header;
+    background-color: #276678;
+    }
+
+    .main {
+    grid-area: main;
+        background-color: white;
+    }
+    .footer {
+    grid-area: footer;
+    color: white;
+    background-color: #1687a7;
+    }
+
+.nav-con > .nav-item > a {
+    color: #276678 !important
+}
