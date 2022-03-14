@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout
 
 from .authen import Authen
@@ -19,7 +19,8 @@ def DoLogin(request):
         user = Authen.authenticate(request,username= request.POST.get("username"), password= request.POST.get("password"))
         if user != None:
             login(request, user)
-            return HttpResponse("Email:"+request.POST.get("username")+ " password : "+request.POST.get("password") )
+            return redirect("/home")
+        #HttpResponse("Email:"+request.POST.get("username")+ " password : "+request.POST.get("password") )
         else:
             return HttpResponse("Invalid login")
 
@@ -32,3 +33,7 @@ def Profile(request):
 def Logout(request):
     logout(request)
     return HttpResponseRedirect("/")
+
+def Signup(request):
+
+    return render(request, 'signup.html')

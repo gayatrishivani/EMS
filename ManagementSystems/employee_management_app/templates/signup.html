@@ -1,4 +1,4 @@
-{% load sstatic %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,37 +17,41 @@
             Jaysinghe & Company
         </h3>
     <form class="w-50">
+        {% csrf_token %}
         <div class="form-border p-5">
-        <div class="my-4">
-            <h3>Sign Up</h3>
+            <div class="my-4">
+                <h3>Sign Up</h3>
+            </div>
+            <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" name="username" class="form-control" onkeyup="validation()" id="username">
+            </div>
+            <div class="mb-3">
+            <label for="emailid" class="form-label">Email</label>
+            <input type="email" name="emailid" class="form-control" onkeyup="validation()" id="emailid">
+            </div>
+            <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" name="password1" class="form-control" onkeyup="validation()" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+            <label for="exampleInputPassword2" class="form-label">Re-Enter Password</label>
+            <input type="password" name="password2" class="form-control" onkeyup="validation()" id="exampleInputPassword2">
+            </div>
+            <!-- <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div> -->
+            <div class="mb-3">
+                <a href="/"> <p>login </p> </a>
+            </div>
+            <button type="submit" id="button" disabled class="btn btn-base">Submit</button>
         </div>
-        <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username">
-        </div>
-        <div class="mb-3">
-        <label for="emailid" class="form-label">Email</label>
-        <input type="email" class="form-control" id="emailid">
-        </div>
-        <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="mb-3">
-        <label for="exampleInputPassword2" class="form-label">Re-Enter Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword2">
-        </div>
-        <!-- <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div> -->
-        <button type="submit" class="btn btn-base">Submit</button>
-    </div>
     </form>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+<script src="{% static 'js/signup.js' %}"></script>
 </body>
 </html>
