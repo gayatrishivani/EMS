@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'styles/atendance.css' %}">
+{% endblock page_css %}
+
+{% block content %}
+
+
+<h3 style="color: #276678;" class="py-3 px-2 border-bottom" >Attendance</h3>
+<div class="wrap">
+    <div class="container py-3 btn-col">
+            <ul class="nav nav-pills aten-nav">
+                <li class="nav-item">
+                <a class="nav-link active" rel="nofollow" href="#mark_attendance">Mark Attendance</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link"  rel="nofollow" href="#view_attendance">View Attendance</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" rel="nofollow" href="#request">Request Leave</a>
+                </li>
+            </ul>
+    </div>
+    <div class="wrap-stage" >
+    <div id="mark_attendance" class="tab-content-at">
+        <div class="container-fluid d-flex w-100 justify-content-center">
+            <div class="flex-column">
+                <h4 class="align-items-center py-3"> Mark Today's Attendance</h4>
+                <button  id ="button" class="btn btn-base btn-cust rounded-pill px-5 shadow align-content-center my-3">Mark Attendance</button><br>
+                <img src="{% static 'img/clip art.png' %}"  alt="">
+                <h6 class="my-2 h-at" id="h-at">You are late!!</h6>
+            </div>
+        </div>
+        <div class="row container mx-5 table-at" id="table-at" style="background-color: #276678;">
+            <div class="col">
+                <h6 class="text-white pt-1"> Date: 20/10/2021 </h6>
+            </div>
+            <div class="col">
+                <h6 class="text-white pt-1"> Time In: 1:10pm </h6>
+            </div>
+            <div class="col">
+                <h6 class="text-white pt-1"> Location: In Company </h6>
+            </div>
+        </div>
+    </div>
+
+    <div id="view_attendance" class="tab-content-at">
+        this is view attendance
+    </div>
+    <div id="request" class="tab-content-at">
+        this is request
+    </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js_link %}
+<script src="{% static 'js/attendance.js' %}"></script>
+{% endblock js_link %}
