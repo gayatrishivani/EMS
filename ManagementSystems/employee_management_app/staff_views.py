@@ -1,6 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
 from django.shortcuts import render
-from datetime import datetime
+
+from .models import Attendance, Staff
 
 
 def Attendance_show(request):
@@ -8,13 +10,15 @@ def Attendance_show(request):
 
 
 def mark_attendance(request):
-    current_user = request.user
-    print(current_user)
-    date_time = datetime.now()
-    date = datetime.now().today().date()
-    time = datetime.now().strftime("%H:%M:%S")
-    print(date_time, time , date)
-    current_user.last_login = date_time = datetime.now()
-    print(current_user.last_login)
-    current_user.save()
-    return HttpResponse("attendance marked!")
+    if request.is_ajax:
+        current_user = request.user
+        staff = Staff.objects.get(admin__id=current_user.id)
+        attendance = Attendance()
+        attendance.is_present = True
+        attendance.staff_id = staff
+        inst = attendance.save()
+        arrival = 'you are late'
+        json_instance = serializers.serialize('json', [inst, ])
+        return JsonResponse({"instance": json_instance, 'arrival':arrival}, status=200)
+    else:
+        return HttpResponse("cannot do that!")
