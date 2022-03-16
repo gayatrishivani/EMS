@@ -21,6 +21,7 @@
     .header {
     grid-area: header;
     background-color: #276678;
+    min-height: 100vh;
     }
 
     .main {
@@ -35,4 +36,24 @@
 
 .nav-con > .nav-item > a {
     color: #276678 !important
+}
+
+.btn-col >ul>li> a {
+    background-color: #D3E0EA !important;
+    color: #276678 !important;
+    margin-left: 2rem !important;
+}
+
+.btn-col ul>li> .active {
+    background-color: #276678 !important;
+    color: white !important;
+}
+
+.btn-cust{
+    background-color: #1687a7!important;
+    color: white !important;
+}
+
+.btn-cust:active{
+    background-color: #276678 !important;
 }

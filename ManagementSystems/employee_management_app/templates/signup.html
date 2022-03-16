@@ -16,7 +16,7 @@
         <h3 style="color: #276678;">
             Jaysinghe & Company
         </h3>
-    <form class="w-50">
+    <form class="w-50" method="post" action="/doSignup">
         {% csrf_token %}
         <div class="form-border p-5">
             <div class="my-4">
@@ -38,10 +38,10 @@
             <label for="exampleInputPassword2" class="form-label">Re-Enter Password</label>
             <input type="password" name="password2" class="form-control" onkeyup="validation()" id="exampleInputPassword2">
             </div>
-            <!-- <div class="mb-3 form-check">
+            <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div> -->
+            <label class="form-check-label"  name="is_staff" for="exampleCheck1" onkeyup="validation()">Staff</label>
+            </div>
             <div class="mb-3">
                 <a href="/"> <p>login </p> </a>
             </div>

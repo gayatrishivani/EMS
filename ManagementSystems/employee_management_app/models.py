@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class CustomUser(AbstractUser):
-    user_type_data = ((1, 'AdminMan'), (2, 'Staff'))
+    user_type_data = ((1, "AdminMan"), (2, "Staff"))
     user_type = models.CharField(default=1,choices=user_type_data, max_length=10 )
 
 
@@ -14,19 +14,10 @@ class CustomUser(AbstractUser):
 class AdminMan(models.Model):
     id = models.AutoField(primary_key=True)
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    image = models.FileField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
-
-    def __str__(self):
-        pass
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'AdminMan'
-        verbose_name_plural = 'AdminMans'
 
 
 class Staff(models.Model):
@@ -37,24 +28,13 @@ class Staff(models.Model):
     )
     id =models.AutoField(primary_key=True)
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
-    gender = models.CharField(max_length = 1, choices=Gender_choices)
-    is_staff = models.BooleanField()
-    created_at = models.DateTimeField(  auto_now_add=True)
-    updated_at = models.DateField(  auto_now_add=True)
-    address = models.TextField()
+    image = models.FileField(blank=True, null=True)
+    gender = models.CharField(max_length = 10, default='O', choices=Gender_choices)
+    is_trainee = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateField(auto_now_add=True)
+    address = models.TextField(blank=True, null=True)
     objects = models.Manager()
-
-
-
-    def __str__(self):
-        pass
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'Staff'
-        verbose_name_plural = 'Staffs'
 
 
 class Client(models.Model):
@@ -77,14 +57,6 @@ class Client(models.Model):
     # assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     objects = models.Manager()
 
-    def __str__(self):
-        pass
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'Client'
-        verbose_name_plural = 'Clients'
 
 class Assignment(models.Model):
     id = models.AutoField(primary_key=True)
@@ -97,14 +69,6 @@ class Assignment(models.Model):
     updated_at = models.DateTimeField(  auto_now_add= True)
     objects = models.Manager()
 
-    def __str__(self):
-        pass
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'Assignment'
-        verbose_name_plural = 'Assignments'
 
 class Attendance(models.Model):
     id = models.AutoField(primary_key=True)
@@ -112,16 +76,6 @@ class Attendance(models.Model):
     staff_id = models.ForeignKey(Staff, on_delete=models.CASCADE)
     log_time = models.DateTimeField(  auto_now_add=True)
     objects = models.Manager()
-
-
-    def __str__(self):
-        pass
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'Attendance'
-        verbose_name_plural = 'Attendances'
 
 class Leave(models.Model):
     leave_choice = (
@@ -136,15 +90,6 @@ class Leave(models.Model):
     created_at = models.DateTimeField(  auto_now_add=True)
     objects = models.Manager()
 
-
-    def __str__(self):
-        pass
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'Leave'
-        verbose_name_plural = 'Leaves'
 
 class Payroll(models.Model):
     id = models.AutoField(primary_key=True)
@@ -164,14 +109,6 @@ class Payroll(models.Model):
     salary_status = models.BooleanField()
     objects = models.Manager()
 
-    def __str__(self):
-        pass
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'Payroll'
-        verbose_name_plural = 'Payrolls'
 
 class Notice(models.Model):
     id = models.AutoField(primary_key=True)
@@ -180,22 +117,14 @@ class Notice(models.Model):
     created_at = models.DateTimeField(  auto_now_add=True)
     objects = models.Manager()
 
-    def __str__(self):
-        pass
-
-    class Meta:
-        db_table = ''
-        managed = True
-        verbose_name = 'Notice'
-        verbose_name_plural = 'Notices'
 
 @receiver(post_save,sender=CustomUser)
 def create_user_profile(sender,instance,created,**kwargs):
     if created:
         if instance.user_type==1:
-            AdminMan.objects.create(admin=instance, image="")
+            AdminMan.objects.create(admin=instance)
         if instance.user_type==2:
-            Staff.objects.create(admin=instance, image="", gender="", is_staff="" ,address="",)
+            Staff.objects.create(admin=instance)    
 @receiver(post_save,sender=CustomUser)
 def save_user_profile(sender,instance,**kwargs):
     if instance.user_type==1:
