@@ -18,18 +18,24 @@ $(document).ready(function(){
     $('#button').click(function(e) {
         console.log('this is being clicked')
         e.preventDefault();
+        var csrftoken = $("[name=csrfmiddlewaretoken]").val();
         $.ajax({
             type:"POST",
             url:"/mark_attendance",
-            data:json,
+            data:{
+                'instance': '',
+                'arrival': '',
+                'csrfmiddlewaretoken' : csrftoken, },
+            dataType:'json',
             success: function(response) {
                 $("#button").prop("disabled", true);
                 //data from django responce
-                var instance = JSON.parse(response["instance"]); 
-                var attenm = JSON.parse(response["arrival"]);
-                console.log(attenm);
-                console.log(instance);
-                $("#h-at").text(attenm)
+                // print('response',response.instance)
+                // var instance = JSON.parse(response["instance"]); 
+                // var attenm = JSON.parse(response["arrival"]);
+                // console.log(attenm);
+                // console.log(instance);
+                // $("#h-at").text(attenm)
     
             },
             error: function(response){

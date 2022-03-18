@@ -15,9 +15,11 @@ urlpatterns = [
     path('doSignup', doSignup, name="doSignUp"),
     path('attendance', Attendance_show, name="attendance"),
     path('mark_attendance', mark_attendance, name = "mark_attendance"),
+    path('request_leave',request_leave, name="request_leave"),
     #admins
     path('admin-home', admin_view, name="adminHome"),
     path('add_staff',Add_staff, name = "add_staff"),
-    path('adding_staff', Adding_staff, name="adding_staff"), 
+    path('adding_staff', Adding_staff, name="adding_staff"),
+
 
 ]
