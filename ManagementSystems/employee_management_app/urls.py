@@ -2,6 +2,8 @@ from unicodedata import name
 from wsgiref.simple_server import demo_app
 from django.urls import path
 
+from .admin_views import client_view
+
 from .staff_views import *
 from .views import *
 
@@ -20,6 +22,6 @@ urlpatterns = [
     path('admin-home', admin_view, name="adminHome"),
     path('add_staff',Add_staff, name = "add_staff"),
     path('adding_staff', Adding_staff, name="adding_staff"),
-
+    path('client', client_view, name='client'),
 
 ]

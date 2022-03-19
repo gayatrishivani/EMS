@@ -1,0 +1,60 @@
+html,
+body {
+margin: 0;
+}
+
+body {
+display: grid;
+grid-template-areas:
+    "navbar-top navbar-top" 
+    "main main"
+    "footer footer"
+;
+grid-template-rows: auto 1fr;
+grid-template-columns: auto 1fr;
+min-height: 100vh;
+}
+.navbar-top{
+grid-area: navbar-top;
+background-color: #D3E0EA;
+}
+.header {
+grid-area: header;
+background-color: #276678;
+min-height: 100vh;
+}
+
+.main {
+    grid-area: main;
+    background-color: white;
+    min-height: 100vh;
+}
+.footer {
+grid-area: footer;
+color: white;
+background-color: #1687a7;
+}
+
+.nav-con > .nav-item > a {
+color: #276678 !important
+}
+
+.btn-col >ul>li> a {
+background-color: #D3E0EA !important;
+color: #276678 !important;
+margin-left: 2rem !important;
+}
+
+.btn-col ul>li> .active {
+background-color: #276678 !important;
+color: white !important;
+}
+
+.btn-cust{
+background-color: #1687a7!important;
+color: white !important;
+}
+
+.btn-cust:active{
+background-color: #276678 !important;
+}
