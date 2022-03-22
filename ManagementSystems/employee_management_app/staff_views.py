@@ -1,8 +1,11 @@
+from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
-from .models import Attendance, Staff
+from .forms import LeaveForm
+
+from .models import Attendance, Leave, Staff
 
 
 def Attendance_show(request):
@@ -12,8 +15,6 @@ def Attendance_show(request):
 
     staff = Staff.objects.get(admin__id = current_user.id)
     attendance = Attendance.objects.filter(staff_id = staff)
-    print(attendance)
-
     context = {
         'id' : id,
         'name' : name,
@@ -24,7 +25,6 @@ def Attendance_show(request):
 
 def mark_attendance(request):
     print('ajax is passed')
-    print(request)
     if request.method == 'POST' :
         current_user = request.user
         staff = Staff.objects.get(admin__id=current_user.id)
@@ -40,4 +40,30 @@ def mark_attendance(request):
         return HttpResponse("cannot do that!")
 
 def request_leave(request):
-    return HttpResponse("This is working")
+    if request.method == 'POST':
+        form = LeaveForm(request.POST)
+        if form.is_valid():
+            traineeid = form.cleaned_data["traineeid"]
+            name = form.cleaned_data["name"]
+            leaveType = form.cleaned_data["leaveType"]
+            date =  form.cleaned_data["date"]
+            NoLeaves = form.cleaned_data["NoLeaves"]
+            leave_message = form.cleaned_data["leave_message"]
+
+            try:
+                leave = Leave()
+                staff = Staff.objects.get(admin__id=traineeid)
+                leave.staff_id = staff
+                leave.leave_type = leaveType
+                leave.no_of_leaves = NoLeaves
+                leave.leave_message = leave_message
+                leave.save()
+                messages.success(request, "leave is submitted")
+                return redirect('/attendance')
+            except:
+                messages.error(request,"failed")
+                return HttpResponse("faied to add leave")
+        else:
+            return HttpResponse("This is working")
+        
+    

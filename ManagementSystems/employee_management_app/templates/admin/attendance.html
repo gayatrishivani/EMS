@@ -1,0 +1,133 @@
+{% extends "admin/admin-base.html" %}
+{% load static %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'styles/atendance.css' %}">
+{% endblock page_css %}
+
+{% block content %}
+
+
+<h3 style="color: #276678;" class="py-3 px-2 border-bottom" >Attendance</h3>
+<div class="wrap">
+    <div class="container py-3 btn-col">
+            <ul class="nav nav-pills aten-nav">
+                <li class="nav-item">
+                <a class="nav-link active" rel="nofollow" href="#mark_attendance">All Attendance</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link"  rel="nofollow" href="#view_attendance">Leaves</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" rel="nofollow" href="#request">Summary</a>
+                </li>
+            </ul>
+    </div>
+    <div class="wrap-stage" >
+    <div id="mark_attendance" class="tab-content-at">
+        <div class="container" >
+            <table class="table table-striped">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Attendance</th>
+                <th scope="col">Time in</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for index in attendance %}
+                
+                <tr>
+                <th scope="row"> {{index.id}} </th>
+                <td> {{index.log_time}} </td>
+                <td> present </td>
+                <td> {{ index.log_time }} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+            {% if attendance.has_other_pages %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                {% if attendance.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page-aten={{ attendance.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+                {% for i in attendance.paginator.page_range %}
+                {% if attendance.number == i %}
+                <li class="active page-item"><span class="page-link" >{{ i }}</span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page-aten={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if attendance.has_next %}
+                <li class="page-item"><a class="page-link" href="?page-aten={{ attendance.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class=" page-item disabled"><span class="page-link" >&raquo;</span></li>
+                {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+
+    <div id="view_attendance" class="tab-content-at">
+        <div class="container" >
+          <table class="table table-striped">
+            <thead >
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Leave date</th>
+                <th scope="col">Leave Type</th>
+                <th scope="col">No. of Leaves</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for index in leaves %}
+              
+              <tr>
+                <th scope="row"> {{index.id}} </th>
+                <td> {{index.created_at}} </td>
+                <td> {{index.leave_type}} </td>
+                <td> {{ index.no_of_leaves }} </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          {% if leaves.has_other_pages %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                {% if leaves.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page-aten={{ leaves.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+                {% for i in leaves.paginator.page_range %}
+                {% if leaves.number == i %}
+                <li class="active page-item"><span class="page-link" >{{ i }}</span></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page-aten={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if leaves.has_next %}
+                <li class="page-item"><a class="page-link" href="?page-aten={{ leaves.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class=" page-item disabled"><span class="page-link" >&raquo;</span></li>
+                {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+    <div id="request" class="tab-content-at">
+    
+    </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js_link %}
+<script src="{% static 'js/attendance.js' %}"></script>
+{% endblock js_link %}

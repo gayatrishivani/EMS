@@ -79,7 +79,7 @@ def Adding_staff(request):
         staff = request.POST.get("is_staff")
         gender = request.POST.get("gender")
         is_staff = True
-        print(first_name, last_name, emailid ,username, password ,staff, gender)
+        
         if staff is None:
             is_staff == False
         

@@ -24,13 +24,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end nav-con">
                     <li class="nav-item" >
-                        <a class="nav-link"  href="#">Home</a>
+                        <a class="nav-link"  href="/admin-home">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Notices</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">Clients</a>
+                        <a class="nav-link" href="/client">Clients</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Contact Us</a>
@@ -50,13 +50,15 @@
 
 
 <main class="main">
-    <div class="p-5">
+    <div class="p-3">
         <h3>Client</h3>
     </div>
 
+
+
     <div class="container-fluid">
         <div class="row border-top">
-            <div class="col-4 bg-info d-flex justify-content-center" style="min-height: 100vh;" >
+            <div class="col-4  d-flex justify-content-center" style="min-height: 100vh; background-color: #D3E0EA;" >
                 <div class="flex-column" >
                     <div class="my-4 pt-2" >
                         <h5 class=" text-center" > Profile </h5>
@@ -88,15 +90,16 @@
                 <div class="container-md my-4">
                     <h4>Basic Info</h4>
                     <hr>
-                    <form action="#">
+                    <form method="post" action="/add_client">
+                        {% csrf_token %}
                         <div class="container-md" >
                             <div class="mb-1">
-                                <label for="CompanyName" class="form-label">CompanyName</label>
-                                <input type="text" name="CompanyName" class="form-control" id="CompanyName" >
+                                <label for="company_name" class="form-label">Company Name</label>
+                                <input type="text" name="company_name" class="form-control" id="company_name" >
                             </div>
                             <div class="mb-1">
-                                <label for="Email" class="form-label">Email</label>
-                                <input type="email" name="Email" class="form-control" id="Email" >
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" >
                             </div>
                             <div class="mb-1">
                                 <label for="CompanyLink" class="form-label">ContactNumbers Link</label>
@@ -128,7 +131,7 @@
                             </div>
                             <div class="mb-1">
                                 <label for="RegisterdOffice" class="form-label">Registered Office</label>
-                                <input type="text" name="RegisterdOffice" class="form-control" id="RegisterdOffice" >
+                                <input type="number" name="RegisterdOffice" class="form-control" id="RegisterdOffice" >
                             </div>
                         </div>
                         <h4> Owner / Office Bearers </h4>
@@ -139,8 +142,8 @@
                                 <input type="text" name="Name" class="form-control" id="Name" >
                             </div>
                             <div class="mb-1">
-                                <label for="Emailid" class="form-label">Email id</label>
-                                <input type="email" name="Emailid" class="form-control" id="Emailid" >
+                                <label for="emailid" class="form-label">email id</label>
+                                <input type="email" name="emailid" class="form-control" id="emailid" >
                             </div>
                             <div class="mb-1">
                                 <label for="Position" class="form-label">Position</label>
@@ -195,8 +198,8 @@
                 <h5>Subscribe</h5>
                 <p>Monthly digest of whats new and exciting from us.</p>
                 <div class="d-flex w-100 gap-2">
-                <label for="newsletter1" class="visually-hidden">Email address</label>
-                <input id="newsletter1" type="text" class="form-control" placeholder="Email address" pwa2-uuid="EDITOR/input-9DD-D96-5E54A-147" pwa-fake-editor="">
+                <label for="newsletter1" class="visually-hidden">email address</label>
+                <input id="newsletter1" type="text" class="form-control" placeholder="email address" pwa2-uuid="EDITOR/input-9DD-D96-5E54A-147" pwa-fake-editor="">
                 <button class="btn btn-primary" type="button">Subscribe</button>
                 </div>
             </form>

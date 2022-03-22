@@ -95,17 +95,18 @@ class Payroll(models.Model):
     id = models.AutoField(primary_key=True)
     AdminMan_id = models.ForeignKey(AdminMan, on_delete=models.CASCADE)
     staff_id = models.ForeignKey(Staff, on_delete=models.CASCADE)
-    rate_per_day = models.BigIntegerField()
+    rate_per_day = models.IntegerField()
     days_present = models.IntegerField()
+    month_pay = models.CharField(max_length=100)
     leaves_with_pay = models.IntegerField()
     base_income = models.IntegerField()
-    ot_rate = models.BigIntegerField() #over time bonous
+    ot_rate = models.IntegerField() #over time bonous
     ot_hours = models.IntegerField()
-    total_amount_ot = models.BigIntegerField()
+    total_amount_ot = models.IntegerField()
     other_reason = models.CharField(max_length=255)
-    other_amount = models.BigIntegerField()
+    other_amount = models.IntegerField()
     totat_other_amount = models.IntegerField()
-    net_salary = models.BigIntegerField()
+    net_salary = models.IntegerField()
     salary_status = models.BooleanField()
     objects = models.Manager()
 

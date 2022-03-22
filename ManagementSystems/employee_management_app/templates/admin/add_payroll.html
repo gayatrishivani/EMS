@@ -1,0 +1,141 @@
+{% extends 'admin/admin-base.html' %}
+{% load static %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'styles/atendance.css' %}">
+{% endblock page_css %}
+
+{% block content %}
+
+<h3 style="color: #276678;" class="py-3 px-2 border-bottom" >Payroll</h3>
+
+<div class="wrap">
+    <div class="container" >
+        <div class="container-fluid d-flex w-100">
+            <div class="flex-column w-100 ">
+              <div class="container-fluid d-flex w-100 justify-content-center " >
+                <h4 class="align-items-center py-3" style=" color: #276678;" > Calculate Monthly Salary</h4>
+              </div>
+                <div class=" container d-flex mb-5 p-5 w-100" style=" background-color: #D3E0EA;">
+                  <form class="w-100" action="/adding-payroll" method="post">
+                    {% csrf_token %}
+                    <div class="form-group row w-100 py-2">
+                      <label for="staff_id" class="col-2 col-form-label">Candiate ID</label>
+                      <div class="col-4">
+                        <input type="number" class="form-control" id="staff_id" name="staff_id" >
+                      </div>
+                    </div>
+    
+                    <hr>
+                    <h4> Basic  </h4>
+                    <div class="form-group row w-100 py-2">
+                      <label for="rate_per_day" class="col-2 col-form-label">Rate Per Day</label>
+                      <div class="col-4">
+                        <input type="number" name="rate_per_day" class="form-control" id="rate_per_day">
+                      </div>
+                    </div>
+    
+                    <div class="form-group row w-100 py-2">
+                        <label for="days_present" class="col-2 col-form-label">Days Present</label>
+                        <div class="col-4">
+                          <input type="number" name="days_present" class="form-control" id="days_present">
+                        </div>
+                      </div>
+    
+                    <div class="form-group row py-2">
+                        
+                        <label for="leaves_with_pay" class="col-2 col-form-label">leaves with pay</label>
+                        <div class="col-4">
+                            <input type="number" name="leaves_with_pay" class="form-control" id="leaves_with_pay">
+                        </div>
+
+                        
+                        <label for="base_income" class="col-2 col-form-label">Basic Income</label>
+                        <div class="col-4">
+                            <input type="number" name="base_income" class="form-control" id="base_income">
+                        </div>
+                        
+                        
+                    </div>
+                    <hr>
+                    <h4> Earning/Bonuses </h4>
+                    <div class="form-group row w-100 py-2">
+                        <label for="ot_rate" class="col-2 col-form-label">OT Rate</label>
+                        <div class="col-4">
+                            <input type="number" name="ot_rate" class="form-control" id="ot_rate">
+                        </div>
+                    </div>
+
+                    <div class="form-group row py-2">
+                        
+                        <label for="ot_hours" class="col-2 col-form-label">OT Hrs</label>
+                        <div class="col-4">
+                            <input type="number" name="ot_hours" class="form-control" id="ot_hours">
+                        </div>
+
+                        
+                        <label for="total_amount_ot" class="col-2 col-form-label">Total Ot Amount</label>
+                        <div class="col-4">
+                            <input type="number" name="total_amount_ot" class="form-control" id="total_amount_ot">
+                        </div>
+                        
+                        
+                    </div>
+
+                    <h4>Other</h4>
+
+                    <div class="form-group row py-2">
+                        
+                        <label for="other_reason" class="col-2 col-form-label">Reason</label>
+                        <div class="col-4">
+                            <input type="text" name="other_reason" class="form-control" id="other_reason">
+                        </div>
+                        
+                        <label for="other_amount" class="col-2 col-form-label">Other Amount</label>
+                        <div class="col-4">
+                            <input type="number" name="other_amount" class="form-control" id="other_amount">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row py-2">
+                        
+                        <label for="totat_other_amount" class="col-2 col-form-label">Total Earing</label>
+                        <div class="col-4">
+                            <input type="number" name="totat_other_amount" class="form-control" id="totat_other_amount">
+                        </div>
+                        
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group row w-100 py-2">
+                        <label for="net_salary" class="col-2 col-form-label">Net Salary </label>
+                        <div class="col-4">
+                            <input type="number" name="net_salary" class="form-control" id="net_salary">
+                        </div>
+                    </div>
+
+                    <div class="form-check w-100 py-2">
+                        <input type="checkbox" name="salary_status" class="form-check-input" id="salary_status">
+                        <label for="salary_status" class="form-check-label">Salary Status</label>
+                        
+                    </div>
+
+                    <div class="justify-content-center">
+                      <button class="btn btn-danger"> Save </button>
+                    </div>
+    
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block js_link %}
+<script src="{% static 'js/attendance.js' %}"></script>
+{% endblock js_link %}
